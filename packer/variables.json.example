@@ -1,0 +1,6 @@
+{
+  "service_account_key_file": "key.json.example",
+  "folder_id": "XXX",
+  "source_image_family": "ubuntu-1604-lts",
+  "subnet_id": "XXX"
+}

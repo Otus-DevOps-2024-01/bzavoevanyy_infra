@@ -84,3 +84,5 @@ fabric.properties
 .terraform/
 /terraform/key.json
 /terraform/.terraform.lock.hcl
+/packer/key.json
+/packer/variables.json
