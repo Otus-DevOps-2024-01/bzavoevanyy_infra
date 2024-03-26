@@ -1,0 +1,7 @@
+cloud_id = "XXX"
+folder_id = "XXX"
+image_id = "XXX"
+service_account_key_file = "key.json"
+public_key_path = "XXX"
+subnet_id = "XXX"
+private_key_path = "XXX"
