@@ -1,28 +1,30 @@
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-
-  backend "s3" {
-    endpoints = {
-      s3 = "storage.yandexcloud.net"
-    }
-    bucket = "<bucket_name>"
-    region = "ru-central1"
-    key    = "<path_to_state_file_in_bucket>/<state_file_name>.tfstate"
-
-    skip_region_validation      = true
-    skip_credentials_validation = true
-    skip_requesting_account_id  = true # This option is required to describe backend for Terraform version 1.6.1 or higher.
-    skip_s3_checksum            = true # This option is required to describe backend for Terraform version 1.6.3 or higher.
-  }
+provider "yandex" {
+  token     = "<IAM-_или_OAuth-токен>"
+  cloud_id  = "<идентификатор_облака>"
+  folder_id = "<идентификатор_каталога>"
+  zone      = "ru-central1-a"
 }
 
-provider "yandex" {
-  token     = "<service_account_OAuth_or_static_key>"
-  cloud_id  = "<cloud_ID>"
-  folder_id = "<folder_ID>"
-  zone      = "<default_availability_zone>"
+resource "yandex_iam_service_account" "sa" {
+  name = "<имя_сервисного_аккаунта>"
+}
+
+// Назначение роли сервисному аккаунту
+resource "yandex_resourcemanager_folder_iam_member" "sa-editor" {
+  folder_id = "<идентификатор_каталога>"
+  role      = "storage.editor"
+  member    = "serviceAccount:${yandex_iam_service_account.sa.id}"
+}
+
+// Создание статического ключа доступа
+resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
+  service_account_id = yandex_iam_service_account.sa.id
+  description        = "static access key for object storage"
+}
+
+// Создание бакета с использованием ключа
+resource "yandex_storage_bucket" "test" {
+  access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
+  secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
+  bucket     = "<имя_бакета>"
 }
