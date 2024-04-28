@@ -90,3 +90,6 @@ fabric.properties
 /terraform/stage/key.json
 /terraform/stage/.terraform.lock.hcl
 /terraform/prod/.terraform.lock.hcl
+/ansible/id_rsa
+/compose.yaml
+/Dockerfile
