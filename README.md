@@ -56,3 +56,26 @@ testapp_port = 9292
 ### ДЗ №7 Создание Terraform модулей для управления компонентами инфраструктуры
 
 Созданы модули terraform для переиспользования в разных конфигурациях, добавлены конфигурации terraform stage и prod
+
+### ДЗ №8 Написание Ansible плейбуков на основе имеющихся bash скриптов
+
+1. Настроил рабочее окружение для выполнения дз, поскольку на локальной машине с macos непросто добиться совместимости по версиям - работу выполняю в докер контейнере from ubuntu:16.04)
+2. При первом выполнении плейбука changed=0 так как репозиторий уже склонирован, после удаления репозитория и повторном выполнении плейбука changed=1
+3. Добавил скрипт inventory.sh и настроил работу ansible с dynamic inventory, результат выполнения команды ansible all -m ping:
+```bash
+root@72d5079c77e0:/app/ansible# ansible all -m ping
+appserver | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+dbserver | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+```
