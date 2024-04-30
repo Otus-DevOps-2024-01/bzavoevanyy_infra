@@ -96,5 +96,4 @@ fabric.properties
 *.retry
 /ansible/id_rsa.pub
 /packer/app.json.pkr.hcl
-/ansible/roles/jdauphant.nginx/
 /vault.key
