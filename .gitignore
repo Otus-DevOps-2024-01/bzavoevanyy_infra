@@ -93,3 +93,5 @@ fabric.properties
 /ansible/id_rsa
 /compose.yaml
 /Dockerfile
+*.retry
+/ansible/id_rsa.pub

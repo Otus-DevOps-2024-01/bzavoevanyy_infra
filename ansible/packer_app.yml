@@ -1,0 +1,10 @@
+---
+- name: Install Git, Ruby && Bundler
+  hosts: all
+  become: true
+  tasks:
+    - name: Install
+      apt:
+        name: git, ruby-full, ruby-bundler, build-essential
+        force_apt_get: true
+        update_cache: true
