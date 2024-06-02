@@ -3,11 +3,8 @@
   hosts: all
   become: true
   tasks:
-    # Установим в цикле все зависимости
-    - name: Install ruby and rubygems and required packages
-      apt: "name={{ item }} state=present"
-      with_items:
-        - git
-        - ruby-full
-        - ruby-bundler
-        - build-essential
+    - name: Install
+      apt:
+        name: git, ruby-full, ruby-bundler, build-essential
+        force_apt_get: true
+        update_cache: true

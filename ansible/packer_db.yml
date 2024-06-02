@@ -20,6 +20,9 @@
       apt:
         name: mongodb-org
         state: present
+        force_apt_get: true
+        update_cache: true
+        force: true
 
     # Включаем сервис
     - name: Configure service supervisor
